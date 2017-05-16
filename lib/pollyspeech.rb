@@ -16,7 +16,7 @@ class PollySpeech
     @polly = Aws::Polly::Client.new(region: region, 
       credentials: Aws::Credentials.new(access_key, secret_key))
     @voice_id = voice_id
-    @cache_filepath = cache_filepath
+    @cache_filepath = File.join(cache_filepath, voice_id)
 
   end
 
