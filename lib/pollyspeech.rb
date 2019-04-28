@@ -5,14 +5,19 @@
 
 require 'aws-sdk'
 require 'digest/md5'
+require 'rxfhelper'
 
 
 class PollySpeech
+  include RXFHelperModule
+  using ColouredText
 
 
   def initialize(access_key: '', secret_key: '', region: 'us-east-1', 
-                  voice_id: 'Emma', cache_filepath: 'cache')
+                  voice_id: 'Emma', cache_filepath: 'cache', debug: false)
 
+    @debug = debug
+    
     @polly = Aws::Polly::Client.new(region: region, 
       credentials: Aws::Credentials.new(access_key, secret_key))
     @voice_id = voice_id
@@ -41,7 +46,8 @@ class PollySpeech
 
     end    
     
-    FileUtils.cp filename, audiofile_out    
+    puts ('audiofile_out' + audiofile_out.inspect).debug if @debug
+    FileX.cp filename, audiofile_out        
 
   end
 
