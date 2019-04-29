@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'pollyspeech'
-  s.version = '0.2.0'
+  s.version = '0.2.1'
   s.summary = 'A wrapper  of the aws-sdk-polly gem which caches audio files locally. ' + 
       'Defaults to a British voice and OGG format.'
   s.authors = ['James Robertson']

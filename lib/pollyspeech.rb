@@ -41,8 +41,10 @@ class PollySpeech
     
     if not File.exists? filename then
             
-      @polly.synthesize_speech(response_target: filename, text: text, 
-        output_format: out_format,  voice_id: @voice_id)
+      params = {response_target: filename, text: text, 
+        output_format: out_format,  voice_id: @voice_id}
+      params.merge!({text_type: 'ssml'}) if text.lstrip =~ /^<speak/
+      @polly.synthesize_speech(params)
 
     end    
     
